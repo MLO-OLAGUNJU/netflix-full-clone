@@ -1,7 +1,16 @@
 import React from "react";
 
 const NavBar = () => {
-  return <div></div>;
+  return (
+    <div className="text-white">
+      <h1>NETFLIX</h1>
+
+      <div>
+        <button>Sign In</button>
+        <button>Sign Up</button>
+      </div>
+    </div>
+  );
 };
 
 export default NavBar;
