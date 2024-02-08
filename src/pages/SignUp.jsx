@@ -41,7 +41,7 @@ const SignUp = () => {
                     Need MLO's Help?
                   </p>
                 </div>
-                <p className="py-4">
+                <p className="py-8">
                   <span className=" text-gray-600">
                     Already subscribed to Netflix?
                   </span>{" "}
