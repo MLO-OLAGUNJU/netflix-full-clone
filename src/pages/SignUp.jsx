@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext"; // Import UserAuth from AuthContext
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, signUp } = UserAuth;
+  const [error, setError] = useState("");
+  const { user, signUp } = UserAuth(); // Invoke UserAuth to get the context values
 
   const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
     try {
       // Call the signUp function with email and password
@@ -19,7 +21,9 @@ const SignUp = () => {
       navigate("/"); // Redirect to home page or wherever you want
     } catch (error) {
       // Handle sign-up failure
+      // alert(error.message);
       console.error("Sign-up failed:", error);
+      setError(error.message);
     }
   };
 
@@ -36,6 +40,7 @@ const SignUp = () => {
           <div className="max-w-[450px] h-[600px] mx-auto bg-black/75 text-white">
             <div className="max-w-[320px] mx-auto py-16">
               <h1 className="text-3xl font-bold">Sign Up</h1>
+              {error ? <p className=" p-3 bg-red-400 my-2">{error}</p> : null}
               <form
                 onSubmit={handleSubmit}
                 className=" w-full flex flex-col py-4"
@@ -64,7 +69,7 @@ const SignUp = () => {
                     Remember me
                   </p>
                   <p className=" hover:text-red-500 cursor-pointer hover:underline">
-                    Need MLO's Help?
+                    Need MLO's AI Help?
                   </p>
                 </div>
                 <p className="py-8">
