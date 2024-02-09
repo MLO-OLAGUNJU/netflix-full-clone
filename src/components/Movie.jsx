@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 const Movie = ({ item }) => {
-  const { user } = useContext(UserAuth); // Correct way to access context value
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
+  const { user } = UserAuth();
 
   const movieID = doc(db, "users", `${user?.email}`);
 
@@ -15,31 +15,27 @@ const Movie = ({ item }) => {
     if (user?.email) {
       setLike(!like);
       setSaved(true);
-      try {
-        await updateDoc(movieID, {
-          savedShows: arrayUnion({
-            id: item.id,
-            title: item.title,
-            img: item.backdrop_path,
-          }),
-        });
-      } catch (error) {
-        console.error("Error updating document:", error);
-      }
+      await updateDoc(movieID, {
+        savedShows: arrayUnion({
+          id: item.id,
+          title: item.title,
+          img: item.backdrop_path,
+        }),
+      });
     } else {
       alert("Please log in to save a movie");
     }
   };
 
   return (
-    <div className="w-[160px] sm:w-[200px] lg:w-[200px] inline-block cursor-pointer relative p-2">
+    <div className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2">
       <img
         className="w-full h-auto block"
         src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
         alt={item?.title}
       />
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
-        <p className="white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center text-wrap">
+        <p className="white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center">
           {item?.title}
         </p>
         <p onClick={saveShow}>

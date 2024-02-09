@@ -10,22 +10,18 @@ const SavedShows = () => {
   const { user } = UserAuth();
 
   const slideLeft = () => {
-    // Your slideLeft function
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
   };
-
   const slideRight = () => {
-    // Your slideRight function
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
   };
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      doc(db, "users", `${user?.email}`),
-      (doc) => {
-        setMovies(doc.data()?.savedShows || []); // Provide a default value if savedShows is undefined
-      }
-    );
-
-    return () => unsubscribe();
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
+      setMovies(doc.data()?.savedShows);
+    });
   }, [user?.email]);
 
   const movieRef = doc(db, "users", `${user?.email}`);
