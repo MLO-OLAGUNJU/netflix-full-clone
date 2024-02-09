@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Children } from "react";
 import { Navigate } from "react-router-dom";
-import { userAuth } from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 
 const ProtextedRoute = () => {
-  const { user } = userAuth;
+  const { user } = UserAuth;
   if (!user) {
     return <Navigate to="/" />;
   } else {
-    return children;
+    return Children;
   }
 };
 
