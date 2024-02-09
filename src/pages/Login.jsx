@@ -57,17 +57,11 @@ const Login = () => {
                   <input className="mr-2" type="checkbox" />
                   Remember me
                 </p>
-                <p className=" hover:text-red-500 cursor-pointer hover:underline">
-                  Need MLO's AI Help?
-                </p>
+                <p>Need Help?</p>
               </div>
               <p className="py-8">
                 <span className="text-gray-600">New to Netflix?</span>{" "}
-                <Link to="/signup">
-                  <span className=" ml-2 font-bold text-white cursor-pointer">
-                    Sign Up
-                  </span>
-                </Link>
+                <Link to="/signup">Sign Up</Link>
               </p>
             </form>
           </div>

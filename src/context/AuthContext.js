@@ -15,9 +15,9 @@ export function AuthContextProvider({ children }) {
 
   function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password);
-    setDoc(doc(db, 'users', email), {
-      savedShows: []
-    })
+    setDoc(doc(db, "users", email), {
+      savedShows: [],
+    });
   }
 
   function logIn(email, password) {
@@ -38,8 +38,6 @@ export function AuthContextProvider({ children }) {
   });
   return (
     <AuthContext.Provider value={{ signUp, user, logIn, logOut }}>
-      {" "}
-      {/* Provide signUp as an object */}
       {children}
     </AuthContext.Provider>
   );

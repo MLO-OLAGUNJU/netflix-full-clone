@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext"; // Import UserAuth from AuthContext
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
-const NavBar = () => {
-  const { user, logOut } = UserAuth(); // Invoke UserAuth to get the context values
-
+const Navbar = () => {
+  const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  // console.log(user.email)
+
   const handleLogout = async () => {
     try {
       await logOut();
@@ -15,7 +15,7 @@ const NavBar = () => {
       console.log(error);
     }
   };
-  // console.log(user.email);
+
   return (
     <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
       <Link to="/">
@@ -51,4 +51,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
