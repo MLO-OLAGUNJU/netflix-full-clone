@@ -14,7 +14,7 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
+    // createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // User created successfully, now set user data in Firestore
         setDoc(doc(db, "users", email), {
