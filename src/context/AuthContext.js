@@ -14,10 +14,17 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password);
-    setDoc(doc(db, "users", email), {
-      savedShows: [],
-    });
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User created successfully, now set user data in Firestore
+        setDoc(doc(db, "users", email), {
+          savedShows: [],
+        });
+      })
+      .catch((error) => {
+        // Handle any errors during user creation
+        console.error("Error signing up:", error);
+      });
   }
 
   function logIn(email, password) {
