@@ -14,6 +14,8 @@ const Movie = ({ item }) => {
 
   const saveShow = async () => {
     console.log("Current user:", user);
+    console.log("User:", user);
+
     if (user?.email) {
       setLike(!like);
       setSaved(true);
