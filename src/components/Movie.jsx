@@ -1,9 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { UserAuth } from "../context/AuthContext";
+import { db } from "../firebase";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 const Movie = ({ item }) => {
   const [like, setLike] = useState(false);
+  const { user } = UserAuth;
+  const [saved, setSaved] = useState(false);
+
+  const movieId = doc(db, "users", `${user?.email}`);
 
   return (
     <div className=" w-[160px] sm:w-[200px] lg:w-[200px] inline-block cursor-pointer relative p-2">
